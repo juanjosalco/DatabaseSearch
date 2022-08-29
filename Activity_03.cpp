@@ -1,5 +1,7 @@
-#include <bits/stdc++.h>
-
+//#include <bits/stdc++.h>
+#include <iostream>
+#include <stdio.h>
+#include <vector>
 using namespace std;
 
 void showVector(vector<string> nums){
@@ -8,7 +10,7 @@ void showVector(vector<string> nums){
     }
     cout << endl;
 }
-
+/*
 int main(){
     vector<string> info;
     string record;
@@ -24,4 +26,4 @@ int main(){
     // cout << "Example: 15:03:57" << endl;
     showVector(info);
     return 0;
-}
+}*/
