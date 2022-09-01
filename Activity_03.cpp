@@ -20,6 +20,11 @@ int getDate(string record){
     return stoi(record.substr(4, 6));
 }
 
+string getDayAndMonth(string record){
+    if(record[5] == ' ') return record.substr(0, 5);
+    else return record.substr(0, 6);
+}
+
 // ----- Part of mergeSort Function --------
 void merge(vector<string> &data, int inicio, int mid, int final){
     int numIzq = mid - inicio + 1;
@@ -84,6 +89,31 @@ void mergeSort(vector<string> &data, int inicio, int final){
     } // Final Time Complexity O(n log n)
 }
 
+// -------------- Binary Search -----------------
+
+int sequentialSearch(vector<string> &info, string date){
+    for(int i = 0; i < info.size(); i++){
+        if(getDayAndMonth(info[i]) == date){
+            return i;
+        }
+    }
+    return -1;
+}
+int inverseSequentialSearch(vector<string> &info, string date){
+    for(int i = info.size(); i > 0; i--){
+        if(getDayAndMonth(info[i]) == date){
+            return i;
+        }
+    }
+    return -1;
+}
+
+void showSelectedRange(vector<string> info, int start, int end){
+    for(int i = start; i < end; i++){
+        cout << info[i] << endl;
+    }
+}
+
 void showVector(vector<string> nums){
     for(int i = 0; i < nums.size(); i++){
         cout << nums[i] << endl;
@@ -94,6 +124,7 @@ void showVector(vector<string> nums){
 int main(){
     vector<string> info;
     string record;
+    string startDate, endDate;
     ifstream MyReadFile("bitacora.txt");
     while(getline(MyReadFile, record)){
         info.push_back(record);
@@ -101,6 +132,14 @@ int main(){
     MyReadFile.close();
     sort(info.begin() + 6, info.end());
     mergeSort(info, 0, info.size()-1);
-    showVector(info);
+    cout << "Ingresa la Fecha de Inicio de Búsqueda en el Siguiente Formato: " << endl;
+    cout << "Example: Jun 1: ";
+    getline(cin, startDate);
+    cout << "Ingresa la Fecha de Final de Búsqueda en el Siguiente Formato: " << endl;
+    cout << "Example: Jun 1: ";
+    getline(cin, endDate);
+    
+    showSelectedRange(info, sequentialSearch(info, startDate), inverseSequentialSearch(info, endDate));
+    
     return 0;
 }
