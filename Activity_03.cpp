@@ -1,5 +1,11 @@
 #include <bits/stdc++.h>
-
+/*
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <algorithm>*/
 using namespace std;
 
 int monthToInt(string month){
@@ -10,20 +16,20 @@ int monthToInt(string month){
         }
     }
     return 0;
-}
+} // Time Complexity O(n)
 
 string getMonth(string record){
     return record.substr(0,3);
-}
+} // Time Complexity O(1)
 
 int getDate(string record){
     return stoi(record.substr(4, 6));
-}
+} // Time Complexity O(1)
 
 string getDayAndMonth(string record){
     if(record[5] == ' ') return record.substr(0, 5);
     else return record.substr(0, 6);
-}
+} // Time Complexity O(1)
 
 // ----- Part of mergeSort Function --------
 void merge(vector<string> &data, int inicio, int mid, int final){
@@ -98,7 +104,8 @@ int sequentialSearch(vector<string> &info, string date){
         }
     }
     return -1;
-}
+} // Time Complexity O(n)
+
 int inverseSequentialSearch(vector<string> &info, string date){
     for(int i = info.size(); i > 0; i--){
         if(getDayAndMonth(info[i]) == date){
@@ -106,22 +113,20 @@ int inverseSequentialSearch(vector<string> &info, string date){
         }
     }
     return -1;
-}
+} // Time Complexity O(n)
 
 void showSelectedRange(vector<string> info, int start, int end){
+    // cree un nuevo txt llamado newBitacora.txt
+    ofstream myfile;
+    myfile.open ("newBitacora.txt"); //open file
     for(int i = start; i < end; i++){
-        cout << info[i] << endl;
+        myfile << info[i] << endl; // Poner todas las lineas en el newBitacora.txt
     }
-}
-
-void showVector(vector<string> nums){
-    for(int i = 0; i < nums.size(); i++){
-        cout << nums[i] << endl;
-    }
-    cout << endl;
-}
+    myfile.close();
+} // Time Complexity O(1)
 
 int main(){
+    fflush(stdin);
     vector<string> info;
     string record;
     string startDate, endDate;
@@ -132,7 +137,7 @@ int main(){
     MyReadFile.close();
     sort(info.begin() + 6, info.end());
     mergeSort(info, 0, info.size()-1);
-    cout << "Ingresa la Fecha de Inicio de Búsqueda en el Siguiente Formato: " << endl;
+    cout << "\nIngresa la Fecha de Inicio de Búsqueda en el Siguiente Formato: " << endl;
     cout << "Example: Jun 1: ";
     getline(cin, startDate);
     cout << "Ingresa la Fecha de Final de Búsqueda en el Siguiente Formato: " << endl;
@@ -140,6 +145,6 @@ int main(){
     getline(cin, endDate);
     
     showSelectedRange(info, sequentialSearch(info, startDate), inverseSequentialSearch(info, endDate));
-    
+    cout << "\nRango Seleccionado Enviado a La Base de Datos" << endl;
     return 0;
 }
