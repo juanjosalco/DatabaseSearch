@@ -1,3 +1,8 @@
+///Act 1.3 - Comprehensive Activity of Basic Concepts and Fundamental Algorithms (Competency Evidence)
+/// Author: Juan Jose Salazar Cortes
+/// Author: Mariana Esquivel Hernandez
+/// date: 09/05/2022
+
 #include <bits/stdc++.h>
 /*
 #include <iostream>
@@ -6,6 +11,7 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>*/
+
 using namespace std;
 
 int monthToInt(string month){
@@ -115,12 +121,13 @@ int inverseSequentialSearch(vector<string> &info, string date){
     return -1;
 } // Time Complexity O(n)
 
+// -------------- Displayed data on new txt -----------------
 void showSelectedRange(vector<string> info, int start, int end){
-    // cree un nuevo txt llamado newBitacora.txt
+    // newBitacora.txt
     ofstream myfile;
-    myfile.open ("newBitacora.txt"); //open file
+    myfile.open ("newBitacora.txt"); 
     for(int i = start; i < end; i++){
-        myfile << info[i] << endl; // Poner todas las lineas en el newBitacora.txt
+        myfile << info[i] << endl; 
     }
     myfile.close();
 } // Time Complexity O(1)
